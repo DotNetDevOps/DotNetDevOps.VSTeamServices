@@ -94,6 +94,7 @@ namespace AzureBlobFileCopy
         {
             Console.WriteLine(ops.StorageAccount.Id);
 
+
         }
     }
 }
