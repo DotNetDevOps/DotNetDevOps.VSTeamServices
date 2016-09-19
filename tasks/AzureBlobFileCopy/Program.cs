@@ -25,7 +25,7 @@ namespace AzureBlobFileCopy
         }
     }
 
-    [ResourceType(TaskInputType = "string")]
+    [ResourceType(TaskInputType = "pickList")]
     public class ARMListKey : IConsoleReader<ProgramOptions>
     {
         public void OnConsoleParsing(Parser parser, string[] args, ProgramOptions options, PropertyInfo info)
@@ -45,23 +45,27 @@ namespace AzureBlobFileCopy
     public class ProgramOptions
     {
 
+        [Display(Name ="Copy Path", Description ="The files that should be copied")]
         [Option("source")]        
         public GlobPath Source { get; set; }
 
         [Required]
-        [Display(Name = "Service Principal", ShortName = "ConnectedServiceName", ResourceType = typeof(ServiceEndpoint), Description = "Azure Service Principal to obtain tokens from")]
+        [Display(Name = "Azure Subscription", ShortName = "ConnectedServiceName", ResourceType = typeof(ServiceEndpoint), Description = "Azure Service Principal to obtain tokens from")]
         public ServiceEndpoint ConnectedServiceName { get; set; }
 
         [Required]
         [ArmResourceIdPicker("Microsoft.Storage/storageAccounts", "2015-06-01")]
+        [Display(Name = "Storage Account", Description = "The storage account to copy files to")]
         [Option("storage")]
       //  [Display(ResourceType =typeof(ARMListKey))]
         public ARMListKey StorageAccount { get; set; }
 
-        [Required]
-        [Option("container")]
+        
+        [Display(Name = "Container Name")]
+        [Option("container",Required = true)]
         public string ContainerName { get; set; }
 
+        [Display(Name ="Prefix for uploaded data")]
         [Option("prefix")]
         public string Prefix { get; set; }
 
