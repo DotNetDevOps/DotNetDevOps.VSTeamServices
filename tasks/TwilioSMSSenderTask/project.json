@@ -1,0 +1,15 @@
+﻿{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "S-Innovations.VSTeamServices.TasksBuilder": "1.0.0-pre-2016091702",
+    "Twilio": "4.7.2"
+  },
+
+  "frameworks": {
+    "net46": {}
+  }
+}
