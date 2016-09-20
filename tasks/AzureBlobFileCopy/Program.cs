@@ -54,7 +54,7 @@ namespace AzureBlobFileCopy
         public ServiceEndpoint ConnectedServiceName { get; set; }
 
         [Required]
-        [ArmResourceIdPicker("Microsoft.Storage/storageAccounts", "2015-06-01")]
+        [ArmResourceIdPicker("Microsoft.Storage/storageAccounts", "2016-01-01")]
         [Display(Name = "Storage Account", Description = "The storage account to copy files to")]
         [Option("storage")]
       //  [Display(ResourceType =typeof(ARMListKey))]

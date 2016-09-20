@@ -27,9 +27,7 @@ namespace TwilioSMSSenderTask
     }
     public class Program
     {
-        private static readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        private static readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
-
+        
         static void Main(string[] args)
         {
 #if DEBUG
