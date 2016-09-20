@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AzureBlob File Copy")]
 [assembly: AssemblyDescription("Upload files to blob storage with content types")]
 [assembly: AssemblyInformationalVersion("1.0.2")]
-[assembly: AssemblyConfiguration("Utilities")]
+[assembly: AssemblyConfiguration("Utility")]
 [assembly: AssemblyCompany("S-Innovations v/Poul K. Sørensen")]
 [assembly: AssemblyProduct("AzureBlobFileCopy")]
 [assembly: AssemblyTrademark("")]

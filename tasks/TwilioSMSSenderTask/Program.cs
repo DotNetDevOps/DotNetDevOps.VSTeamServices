@@ -22,7 +22,7 @@ namespace TwilioSMSSenderTask
         public string Message { get; set; }
         [Option("ReceiverNumber")]
         public string ReceiverNumber { get; set; }
-        [Option("AccountSid")]
+        [Option("SenderNumber")]
         public string SenderNumber { get; set; }
     }
     public class Program

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Twilio SMS Sender")]
 [assembly: AssemblyDescription("Send sms with Twilio")]
 [assembly: AssemblyInformationalVersion("1.0.0")]
-[assembly: AssemblyConfiguration("Utilities")]
+[assembly: AssemblyConfiguration("Utility")]
 [assembly: AssemblyCompany("S-Innovations v/Poul K. Sørensen")]
 [assembly: AssemblyProduct("TwilioSMSSenderTask")]
 [assembly: AssemblyTrademark("")]
