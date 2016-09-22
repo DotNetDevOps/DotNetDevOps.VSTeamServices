@@ -31,7 +31,7 @@ namespace TwilioSMSSenderTask
         static void Main(string[] args)
         {
 #if DEBUG
-            args = new[] { "--build" };
+            args = new[] { "--build" }; 
 #endif
 
             var ops = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Sending SMS", args);
@@ -41,7 +41,7 @@ namespace TwilioSMSSenderTask
                    ops.SenderNumber, // From number, must be an SMS-enabled Twilio number
                    ops.ReceiverNumber,     // To number, if using Sandbox see note above
                                            // message content
-              "Hello Azure MEETUP"      //ops.Message
+                   ops.Message  
             );
 
             Console.WriteLine(string.Format("Sent message to {0}", ops.ReceiverNumber));
