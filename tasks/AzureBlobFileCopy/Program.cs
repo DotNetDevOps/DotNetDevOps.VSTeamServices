@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading;
@@ -95,6 +96,10 @@ namespace AzureBlobFileCopy
             get; set;
         }
 
+
+        [Display(Name = "Verbose", Description = "Write out each file thats uploaded")]
+        [Option("Verbose")]
+        public bool Verbose { get; set; }
     }
     public class Program
     {
@@ -108,7 +113,13 @@ namespace AzureBlobFileCopy
 
 
 
+
 #endif
+            ServicePointManager.UseNagleAlgorithm = true;
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.CheckCertificateRevocationList = true;
+            ServicePointManager.DefaultConnectionLimit = ServicePointManager.DefaultPersistentConnectionLimit * 100;
+
             try
             {
 
@@ -136,36 +147,45 @@ namespace AzureBlobFileCopy
 
             var actionBlock = new TransformBlock<string, Tuple<string, CloudBlockBlob, TimeSpan>>(async (string file) =>
                {
-                   var stopWatch = Stopwatch.StartNew();
+                   var filestopWatch = Stopwatch.StartNew();
                    using (var fileStream = File.OpenRead(file))
                    {
-                       var blob = container.GetBlockBlobReference($"{ops.Prefix}/{file.Substring(ops.Source.Root.Length)}".TrimStart('/'));
+                       var blob = container.GetBlockBlobReference(Path.Combine(ops.Prefix,file.Substring(ops.Source.Root.Length).TrimStart('/','\\')).Replace("\\","/"));
                        blob.Properties.ContentType = Constants.GetContentType(file);
 
                        using (var writeable = await blob.OpenWriteAsync())
                        {
                            await fileStream.CopyToAsync(writeable);
                        }
-                       return new Tuple<string, CloudBlockBlob, TimeSpan>(file, blob, stopWatch.Elapsed);
+                       return new Tuple<string, CloudBlockBlob, TimeSpan>(file, blob, filestopWatch.Elapsed);
                    }
 
                }, new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = 64 });
 
+            var i = 0;
             var completed = new ActionBlock<Tuple<string, CloudBlockBlob, TimeSpan>>((blob) =>
              {
-                 Console.WriteLine($"Uploaded {blob.Item1} to {blob.Item2.Name} completed in {blob.Item3}");
+                 if (ops.Verbose)
+                 {
+                     Console.WriteLine($"Uploaded {blob.Item1} to {blob.Item2.Name} completed in {blob.Item3}");
+                 }
 
+                 Interlocked.Increment(ref i);
              });
 
             actionBlock.LinkTo(completed, new DataflowLinkOptions { PropagateCompletion = true });
+            var stopWatch = Stopwatch.StartNew(); 
             foreach (var file in ops.Source.MatchedFiles())
             {
+                
                 await actionBlock.SendAsync(file);
             }
 
             actionBlock.Complete();
 
             await completed.Completion;
+
+            Console.WriteLine($"Uploaded {i} files to {container.Name}{ops.Prefix} in {stopWatch.Elapsed}");
 
 
             if (!string.IsNullOrEmpty(ops.StorageContainerUri))

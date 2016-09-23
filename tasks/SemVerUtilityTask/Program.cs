@@ -9,7 +9,7 @@ using SInnovations.VSTeamServices.TasksBuilder.Tasks;
 
 namespace SemVerUtilityTask
 {
-    [EntryPoint("Sending sms to $(ReceiverNumber)")]
+    [EntryPoint("Updating variable $(VariableName)")]
     public class ProgramOptions
     {
         [Option("SemVer")]
