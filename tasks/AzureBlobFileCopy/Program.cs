@@ -18,6 +18,7 @@ using SInnovations.VSTeamServices.TasksBuilder.Attributes;
 using SInnovations.VSTeamServices.TasksBuilder.AzureResourceManager.ResourceTypes;
 using SInnovations.VSTeamServices.TasksBuilder.ConsoleUtils;
 using SInnovations.VSTeamServices.TasksBuilder.ResourceTypes;
+using SInnovations.VSTeamServices.TasksBuilder.Tasks;
 
 namespace AzureBlobFileCopy
 {
@@ -59,6 +60,7 @@ namespace AzureBlobFileCopy
 
     [ConnectedServiceRelation(typeof(ConnectedServiceRelation))]
     [EntryPoint("Uploading to $(storage)")]
+    [Group(DisplayName = "Output", isExpanded = true,  Name ="output")]
     public class ProgramOptions
     {
 
@@ -86,7 +88,19 @@ namespace AzureBlobFileCopy
         [Option("prefix")]
         public string Prefix { get; set; }
 
-    }
+
+        [Display(Name = "Storage Container Uri", GroupName = "output")]
+        [Option("StorageContainerUri")]
+        public string StorageContainerUri { get; set; }
+
+        [Display(Name = "Storage Container SAS token", GroupName = "output")]
+        [Option("StorageContainerSASToken")]
+        public string StorageContainerSASToken
+        {
+            get; set;
+        }
+
+        }
     public class Program
     {
         private static readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
@@ -154,7 +168,23 @@ namespace AzureBlobFileCopy
             actionBlock.Complete();
 
             await completed.Completion;
-            
+
+
+            if (!string.IsNullOrEmpty(ops.StorageContainerUri))
+            {
+                TaskHelper.SetVariable(ops.StorageContainerUri, container.Uri.ToString());
+
+            }
+            if (!string.IsNullOrEmpty(ops.StorageContainerSASToken))
+            {
+                TaskHelper.SetVariable(ops.StorageContainerSASToken, container.GetSharedAccessSignature(new SharedAccessBlobPolicy
+                {
+                    SharedAccessExpiryTime = DateTimeOffset.UtcNow.AddHours(2),
+                    Permissions = SharedAccessBlobPermissions.Add | SharedAccessBlobPermissions.Create | SharedAccessBlobPermissions.Delete | SharedAccessBlobPermissions.List | SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Write
+                }),
+                     true);
+            }
+
         }
     }
 }
