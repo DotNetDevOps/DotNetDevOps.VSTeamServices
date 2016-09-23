@@ -37,14 +37,12 @@ namespace AzureBlobFileCopy
     {
         public void OnConsoleParsing(Parser parser, string[] args, ProgramOptions options, PropertyInfo info)
         {
-            info.SetValue(options, new ARMListKey() { Id = args[Array.IndexOf(args, "--storage") + 1] });
-
-
+            Id = args[Array.IndexOf(args, "--storage") + 1];
         }
 
         public void Execute(ProgramOptions options)
         {
-            var http = options.ConnectedServiceName.GetAuthorizedHttpClient("https://management.azure.com");
+            var http = options.ConnectedServiceName.GetAuthorizedHttpClient("https://management.azure.com/");
 
             var keys = http.PostAsync($"https://management.azure.com{Id}/listKeys?api-version=2016-01-01", new StringContent(string.Empty)).GetAwaiter().GetResult();
             var keysObj = JObject.Parse(keys.Content.ReadAsStringAsync().GetAwaiter().GetResult());
@@ -58,13 +56,13 @@ namespace AzureBlobFileCopy
 
     }
 
-   // [ConnectedServiceRelation(typeof(ConnectedServiceRelation))]
+    [ConnectedServiceRelation(typeof(ConnectedServiceRelation))]
     [EntryPoint("Uploading to $(storage)")]
-    [Group(DisplayName = "Output", isExpanded = true,  Name ="output")]
+    [Group(DisplayName = "Output", isExpanded = true, Name = "output")]
     public class ProgramOptions
     {
 
-        [Display(ShortName = "source", Name = "Copy Path", Description = "The files that should be copied", ResourceType =typeof(GlobPath))]
+        [Display(ShortName = "source", Name = "Copy Path", Description = "The files that should be copied", ResourceType = typeof(GlobPath))]
         public GlobPath Source { get; set; }
 
         [Required]
@@ -73,7 +71,7 @@ namespace AzureBlobFileCopy
 
         [Required]
         [ArmResourceIdPicker("Microsoft.Storage/storageAccounts", "2016-01-01")]
-        [Display(ShortName ="storage", Name = "Storage Account", Description = "The storage account to copy files to", ResourceType =typeof(ARMListKey))]
+        [Display(ShortName = "storage", Name = "Storage Account", Description = "The storage account to copy files to", ResourceType = typeof(ARMListKey))]
         public ARMListKey StorageAccount { get; set; }
 
 
@@ -97,7 +95,7 @@ namespace AzureBlobFileCopy
             get; set;
         }
 
-        }
+    }
     public class Program
     {
         private static readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
@@ -107,6 +105,8 @@ namespace AzureBlobFileCopy
         {
 #if DEBUG
             args = new[] { "--build" };
+
+
 
 #endif
             try
@@ -127,40 +127,40 @@ namespace AzureBlobFileCopy
         {
 
             Console.WriteLine($"Uploading data at {ops.Source} to {ops.StorageAccount.Account.BlobEndpoint} using {ops.Prefix} as prefix in {ops.ContainerName}");
-           
+
             var client = ops.StorageAccount.Account.CreateCloudBlobClient();
 
             var container = client.GetContainerReference(ops.ContainerName);
 
             await container.CreateIfNotExistsAsync();
 
-            var actionBlock = new TransformBlock<string,Tuple<string,CloudBlockBlob,TimeSpan>>(async (string file) =>
+            var actionBlock = new TransformBlock<string, Tuple<string, CloudBlockBlob, TimeSpan>>(async (string file) =>
+               {
+                   var stopWatch = Stopwatch.StartNew();
+                   using (var fileStream = File.OpenRead(file))
+                   {
+                       var blob = container.GetBlockBlobReference($"{ops.Prefix}/{file.Substring(ops.Source.Root.Length)}".TrimStart('/'));
+                       blob.Properties.ContentType = Constants.GetContentType(file);
+
+                       using (var writeable = await blob.OpenWriteAsync())
+                       {
+                           await fileStream.CopyToAsync(writeable);
+                       }
+                       return new Tuple<string, CloudBlockBlob, TimeSpan>(file, blob, stopWatch.Elapsed);
+                   }
+
+               }, new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = 64 });
+
+            var completed = new ActionBlock<Tuple<string, CloudBlockBlob, TimeSpan>>((blob) =>
+             {
+                 Console.WriteLine($"Uploaded {blob.Item1} to {blob.Item2.Name} completed in {blob.Item3}");
+
+             });
+
+            actionBlock.LinkTo(completed, new DataflowLinkOptions { PropagateCompletion = true });
+            foreach (var file in ops.Source.MatchedFiles())
             {
-                var stopWatch = Stopwatch.StartNew();
-                using (var fileStream = File.OpenRead(file))
-                {
-                    var blob = container.GetBlockBlobReference($"{ops.Prefix}/{file.Substring(ops.Source.Root.Length)}".TrimStart('/'));
-                    blob.Properties.ContentType = Constants.GetContentType(file);
-
-                    using (var writeable = await blob.OpenWriteAsync())
-                    {
-                        await fileStream.CopyToAsync(writeable);
-                    }
-                    return new Tuple<string,CloudBlockBlob,TimeSpan>(file,blob,stopWatch.Elapsed);
-                }
-
-            }, new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = 64 });
-
-            var completed = new ActionBlock<Tuple<string, CloudBlockBlob,TimeSpan>>((blob) =>
-            {
-                Console.WriteLine($"Uploaded {blob.Item1} to {blob.Item2.Name} completed in {blob.Item3}");
-
-            });
-
-            actionBlock.LinkTo(completed,new DataflowLinkOptions { PropagateCompletion = true });
-            foreach(var file in ops.Source.MatchedFiles())
-            {
-                await actionBlock.SendAsync(file);  
+                await actionBlock.SendAsync(file);
             }
 
             actionBlock.Complete();
