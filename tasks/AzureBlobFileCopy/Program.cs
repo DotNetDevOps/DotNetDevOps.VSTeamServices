@@ -37,7 +37,7 @@ namespace AzureBlobFileCopy
     {
         public void OnConsoleParsing(Parser parser, string[] args, ProgramOptions options, PropertyInfo info)
         {
-            info.SetValue(options, new ARMListKey() { Id = args[Array.IndexOf(args, "storage") + 1] });
+            info.SetValue(options, new ARMListKey() { Id = args[Array.IndexOf(args, "--storage") + 1] });
 
 
         }
@@ -58,14 +58,13 @@ namespace AzureBlobFileCopy
 
     }
 
-    [ConnectedServiceRelation(typeof(ConnectedServiceRelation))]
+   // [ConnectedServiceRelation(typeof(ConnectedServiceRelation))]
     [EntryPoint("Uploading to $(storage)")]
     [Group(DisplayName = "Output", isExpanded = true,  Name ="output")]
     public class ProgramOptions
     {
 
-        [Display(Name = "Copy Path", Description = "The files that should be copied")]
-        [Option("source")]
+        [Display(ShortName = "source", Name = "Copy Path", Description = "The files that should be copied", ResourceType =typeof(GlobPath))]
         public GlobPath Source { get; set; }
 
         [Required]
@@ -74,9 +73,7 @@ namespace AzureBlobFileCopy
 
         [Required]
         [ArmResourceIdPicker("Microsoft.Storage/storageAccounts", "2016-01-01")]
-        [Display(Name = "Storage Account", Description = "The storage account to copy files to")]
-        [Option("storage")]
-        //  [Display(ResourceType =typeof(ARMListKey))]
+        [Display(ShortName ="storage", Name = "Storage Account", Description = "The storage account to copy files to", ResourceType =typeof(ARMListKey))]
         public ARMListKey StorageAccount { get; set; }
 
 
@@ -110,6 +107,7 @@ namespace AzureBlobFileCopy
         {
 #if DEBUG
             args = new[] { "--build" };
+
 #endif
             try
             {
