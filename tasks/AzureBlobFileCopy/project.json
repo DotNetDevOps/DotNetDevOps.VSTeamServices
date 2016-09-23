@@ -5,7 +5,9 @@
   },
 
   "dependencies": {
-    "S-Innovations.VSTeamServices.TasksBuilder.AzureResourceManager": "1.0.0-pre-2016091702"
+    "Microsoft.Tpl.Dataflow": "4.5.24",
+    "S-Innovations.VSTeamServices.TasksBuilder.AzureResourceManager": "1.0.0-pre-2016091702",
+    "WindowsAzure.Storage": "7.2.1"
   },
 
   "frameworks": {
