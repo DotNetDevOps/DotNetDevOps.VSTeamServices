@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyInformationalVersion("1.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.1")]
 [assembly: AssemblyTitle("Update a Json File using Json Path")]
 [assembly: AssemblyDescription("Using JsonPath properties can be replaced in json files")]
 [assembly: AssemblyConfiguration("Utility")]

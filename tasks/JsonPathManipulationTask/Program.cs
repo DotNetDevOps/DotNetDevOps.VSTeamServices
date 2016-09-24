@@ -16,7 +16,7 @@ namespace JsonPathManipulationTask
     public class ProgramOptions
     {
         [Display(ShortName = "JsonFile", Name = "Json File", Description = "Path to the json file to update", ResourceType = typeof(GlobPath))]
-        public string JsonFile { get; set; }
+        public GlobPath JsonFiles { get; set; }
 
         [Option("JsonPathFilter", HelpText = "The JsonPath filter to select token with")]
         public string JsonPathFilter { get; set; }
@@ -40,14 +40,17 @@ namespace JsonPathManipulationTask
 #endif
             var options = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Editing Json File", args);
 
-            var json = JToken.Parse(File.ReadAllText(options.JsonFile));
+            foreach (var file in options.JsonFiles.MatchedFiles())
+            {
+                var json = JToken.Parse(File.ReadAllText(file));
 
-            var token = json.SelectToken(options.JsonPathFilter);
+                var token = json.SelectToken(options.JsonPathFilter);
+                token.Replace(options.ReplacementValue);
+              //  var property = token.Parent as JProperty;
+              //  property.Value = options.ReplacementValue;
 
-            var property = token.Parent as JProperty;
-            property.Value = options.ReplacementValue;
-
-            File.WriteAllText(options.JsonFile, json.ToString());
+                File.WriteAllText(file, json.ToString());
+            }
 
 
         }
