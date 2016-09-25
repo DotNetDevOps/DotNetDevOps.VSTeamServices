@@ -111,7 +111,8 @@ namespace AzureBlobFileCopy
 #if DEBUG
             args = new[] { "--build" };
 
-
+          
+            
 
 
 #endif
