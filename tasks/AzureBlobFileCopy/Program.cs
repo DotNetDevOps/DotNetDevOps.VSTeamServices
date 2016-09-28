@@ -109,12 +109,7 @@ namespace AzureBlobFileCopy
         static void Main(string[] args)
         {
 #if DEBUG
-            args = new[] { "--build" };
-
-          
-            
-
-
+     //       args = new[] { "--build" };
 #endif
             ServicePointManager.UseNagleAlgorithm = true;
             ServicePointManager.Expect100Continue = true;

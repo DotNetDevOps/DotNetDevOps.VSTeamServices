@@ -27,7 +27,7 @@ namespace SemVerUtilityTask
         static void Main(string[] args)
         {
 #if DEBUG
-            args = new[] { "--build" };
+          //  args = new[] { "--build" };
 #endif
 
             var ops = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Runing SemVer Manipuaton", args);

@@ -30,14 +30,12 @@ namespace JsonPathExtractToVariableTask
         static void Main(string[] args)
         {
 #if DEBUG
-            args = new[]
-            {
-                 "--build",
-                 //   "--JsonFile", @"bin\Debug\net46\win7-x64\task.json",
-                //    "--JsonPathFilter", "$.version",
-                 //   "--ReplacementValue", "1.0.2"
-                   
-            };
+            //args = new[]
+            //{    
+            //        "--JsonFile", @"bin\Debug\net46\win7-x64\task.json",
+            //        "--JsonPathFilter", "$.version",
+            //        "--ReplacementValue", "1.0.2"
+            //};
 #endif
             var options = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Editing Json File", args);
 

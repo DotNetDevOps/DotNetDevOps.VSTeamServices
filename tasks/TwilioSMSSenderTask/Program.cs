@@ -31,7 +31,7 @@ namespace TwilioSMSSenderTask
         static void Main(string[] args)
         {
 #if DEBUG
-            args = new[] { "--build" }; 
+       //     args = new[] { "--build" }; 
 #endif
 
             var ops = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Sending SMS", args);
