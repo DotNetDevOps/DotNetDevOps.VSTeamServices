@@ -16,13 +16,11 @@ using SInnovations.VSTeamServices.TasksBuilder.ConsoleUtils;
 namespace VSTSBuildInfoTask
 {
     [EntryPoint("Creating Build Artifact")]
-
     public class ProgramOptions
     {
         [Display(Description = "The path to save the artifact file", Name = "Output File Name")]
         [Option("OutPutFileName")]
         public string OutPutFileName { get; set; }
-
 
     }
 
@@ -30,7 +28,7 @@ namespace VSTSBuildInfoTask
     {
         static void Main(string[] args)
         {
-            var options = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Running Create AzureAD Applcaition Task", args);
+            var options = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Creating Build Artifact", args);
 
             var teamUri = Environment.GetEnvironmentVariable("SYSTEM_TEAMFOUNDATIONCOLLECTIONURI");
             var teamProject = Environment.GetEnvironmentVariable("SYSTEM_TEAMPROJECT");
