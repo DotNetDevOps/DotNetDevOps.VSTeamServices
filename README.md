@@ -56,7 +56,7 @@ together with
 		}			
 ```
 or using 
-```
+
 ```
 	[Display(ShortName = "JsonFile", Name = "Json File", Description = "Path to the json file to update", ResourceType = typeof(GlobPath))]
 	public string JsonFiles { get; set; }
@@ -64,6 +64,7 @@ or using
 to make it use the filepicker and resolve to one file.
 
 The following assembly attributes must be defined for the generator to work currently.
+
 ```
 [assembly: AssemblyInformationalVersion("1.0.1")]
 [assembly: AssemblyTitle("Update a Json File using Json Path")]
