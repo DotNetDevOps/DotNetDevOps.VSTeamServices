@@ -227,7 +227,7 @@ namespace AzureWebAppDeploymentTask
 
                         EnsureVirtualAppCreated(appConfig, "/pr", $@"site\pr");
                         EnsureVirtualAppCreated(appConfig, $"/pr/{repositoryName}", $@"site\pr\{repositoryName}");
-                        EnsureVirtualAppCreated(appConfig, $"/pr/{repositoryName}/{pullRequestId}", $@"site\pr\{repositoryName}\{pullRequestId}");
+                        options.AppOfflineRule = options.AppOfflineRule && EnsureVirtualAppCreated(appConfig, $"/pr/{repositoryName}/{pullRequestId}", $@"site\pr\{repositoryName}\{pullRequestId}");
 
                         client.Sites.CreateOrUpdateSiteConfig(options.WebAppResourceGroupName, options.WebApp, appConfig);
 
@@ -353,7 +353,7 @@ namespace AzureWebAppDeploymentTask
 
         }
 
-        private static void EnsureVirtualAppCreated(SiteConfig appConfig, string virt, string phy)
+        private static bool EnsureVirtualAppCreated(SiteConfig appConfig, string virt, string phy)
         {
             if (!appConfig.VirtualApplications.Any(p => p.VirtualPath == virt))
             {
@@ -362,7 +362,10 @@ namespace AzureWebAppDeploymentTask
                     PhysicalPath = phy,
                     VirtualPath = virt
                 });
+                return false;
             }
+
+            return true;
         }
 
         private static string GetDeployIisAppPath(ProgramOptions options)

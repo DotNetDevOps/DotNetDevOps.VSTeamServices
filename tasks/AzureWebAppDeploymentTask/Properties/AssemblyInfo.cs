@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.42")]
+[assembly: AssemblyInformationalVersion("1.0.43")]
 [assembly: AssemblyTitle("Deploy WebApp to Azure App Service")]
 [assembly: AssemblyDescription("Deploy using msdeploy to azure app service")]
 [assembly: AssemblyCompany("S-Innovations v/Poul K. Sørensen")]
