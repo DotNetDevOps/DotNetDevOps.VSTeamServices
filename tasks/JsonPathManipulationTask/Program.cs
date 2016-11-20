@@ -6,9 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommandLine;
 using Newtonsoft.Json.Linq;
-using SInnovations.VSTeamServices.TasksBuilder.Attributes;
-using SInnovations.VSTeamServices.TasksBuilder.ConsoleUtils;
-using SInnovations.VSTeamServices.TasksBuilder.ResourceTypes;
+using SInnovations.VSTeamServices.TaskBuilder.Attributes;
+using SInnovations.VSTeamServices.TaskBuilder.ConsoleUtils;
+using SInnovations.VSTeamServices.TaskBuilder.ResourceTypes;
 
 namespace JsonPathManipulationTask
 {

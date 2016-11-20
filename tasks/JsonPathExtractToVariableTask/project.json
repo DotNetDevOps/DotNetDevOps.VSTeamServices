@@ -5,7 +5,7 @@
   },
 
   "dependencies": {
-    "S-Innovations.VSTeamServices.TasksBuilder.AzureResourceManager": "1.0.0-pre-2016091702"
+    "S-Innovations.VSTeamServices.TaskBuilder.AzureResourceManager": "1.0.0-pre-2016091702"
   },
 
   "frameworks": {

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CommandLine;
-using SInnovations.VSTeamServices.TasksBuilder.Attributes;
-using SInnovations.VSTeamServices.TasksBuilder.ConsoleUtils;
+using SInnovations.VSTeamServices.TaskBuilder.Attributes;
+using SInnovations.VSTeamServices.TaskBuilder.ConsoleUtils;
 using Twilio;
 
 namespace TwilioSMSSenderTask

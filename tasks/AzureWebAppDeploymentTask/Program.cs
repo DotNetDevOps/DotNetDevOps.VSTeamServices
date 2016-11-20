@@ -16,11 +16,11 @@ using Microsoft.Azure.Management.WebSites.Models;
 using Microsoft.Rest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SInnovations.VSTeamServices.TasksBuilder.Attributes;
-using SInnovations.VSTeamServices.TasksBuilder.AzureResourceManager.ResourceTypes;
-using SInnovations.VSTeamServices.TasksBuilder.ConsoleUtils;
-using SInnovations.VSTeamServices.TasksBuilder.ResourceTypes;
-using SInnovations.VSTeamServices.TasksBuilder.Tasks;
+using SInnovations.VSTeamServices.TaskBuilder.Attributes;
+using SInnovations.VSTeamServices.TaskBuilder.AzureResourceManager.ResourceTypes;
+using SInnovations.VSTeamServices.TaskBuilder.ConsoleUtils;
+using SInnovations.VSTeamServices.TaskBuilder.ResourceTypes;
+using SInnovations.VSTeamServices.TaskBuilder.Tasks;
 
 namespace AzureWebAppDeploymentTask
 {
@@ -59,7 +59,7 @@ namespace AzureWebAppDeploymentTask
         //public bool MoveWebConfigToParent { get; set; }
 
         [Display(GroupName = "AspNetCore")]
-        [Option("DNXDeployment", HelpText = "DNS Deployment Properties", DefaultValue = false)]
+        [Option("DNXDeployment", HelpText = "DNS Deployment Properties",Default = false)]
         public bool DNXDeployment { get; set; }
 
         [VisibleRule("DNXDeployment == true")]

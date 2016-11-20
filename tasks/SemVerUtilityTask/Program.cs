@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CommandLine;
-using SInnovations.VSTeamServices.TasksBuilder.Attributes;
-using SInnovations.VSTeamServices.TasksBuilder.ConsoleUtils;
-using SInnovations.VSTeamServices.TasksBuilder.Tasks;
+using SInnovations.VSTeamServices.TaskBuilder.Attributes;
+using SInnovations.VSTeamServices.TaskBuilder.ConsoleUtils;
+using SInnovations.VSTeamServices.TaskBuilder.Tasks;
 
 namespace SemVerUtilityTask
 {

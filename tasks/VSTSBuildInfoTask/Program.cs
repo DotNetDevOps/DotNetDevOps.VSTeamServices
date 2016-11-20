@@ -10,8 +10,8 @@ using CommandLine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using SInnovations.VSTeamServices.TasksBuilder.Attributes;
-using SInnovations.VSTeamServices.TasksBuilder.ConsoleUtils;
+using SInnovations.VSTeamServices.TaskBuilder.Attributes;
+using SInnovations.VSTeamServices.TaskBuilder.ConsoleUtils;
 
 namespace VSTSBuildInfoTask
 {

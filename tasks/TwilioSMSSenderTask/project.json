@@ -5,7 +5,7 @@
   },
 
   "dependencies": {
-    "S-Innovations.VSTeamServices.TasksBuilder": "1.0.0-pre-2016091702",
+    "S-Innovations.VSTeamServices.TaskBuilder": "1.0.0-pre-2016091702",
     "Twilio": "4.7.2"
   },
 
