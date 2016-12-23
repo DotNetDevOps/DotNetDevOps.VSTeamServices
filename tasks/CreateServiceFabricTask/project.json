@@ -1,0 +1,21 @@
+﻿{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "embed": [
+      "cluster.json"
+    ]
+  },
+
+  "dependencies": {
+    "S-Innovations.VSTeamServices.TaskBuilder.KeyVault":  "1.0.0-pre-2016122301"
+  },
+
+  "frameworks": {
+    "net46": {
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": "4.0.0.0"
+      }
+    }
+  }
+}
