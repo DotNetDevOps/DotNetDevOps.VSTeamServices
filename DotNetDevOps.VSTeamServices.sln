@@ -29,6 +29,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "VSTSBuildInfoTask", "tasks\
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AzureWebAppDeploymentTask", "tasks\AzureWebAppDeploymentTask\AzureWebAppDeploymentTask.xproj", "{8831D079-A2F0-4D49-BEBA-3715C5450BFE}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CreateOrUpdateCertificateTask", "tasks\CreateOrUpdateCertificateTask\CreateOrUpdateCertificateTask.xproj", "{D9401915-BFA7-4D3E-92A5-DCDE4904020C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{8831D079-A2F0-4D49-BEBA-3715C5450BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8831D079-A2F0-4D49-BEBA-3715C5450BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8831D079-A2F0-4D49-BEBA-3715C5450BFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9401915-BFA7-4D3E-92A5-DCDE4904020C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9401915-BFA7-4D3E-92A5-DCDE4904020C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9401915-BFA7-4D3E-92A5-DCDE4904020C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9401915-BFA7-4D3E-92A5-DCDE4904020C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,5 +81,6 @@ Global
 		{EF31F64D-0EB2-4367-91F8-5A0B2F10C40A} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{243ABAC4-BC62-42D2-8E69-2FC67020F2E7} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{8831D079-A2F0-4D49-BEBA-3715C5450BFE} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
+		{D9401915-BFA7-4D3E-92A5-DCDE4904020C} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 	EndGlobalSection
 EndGlobal

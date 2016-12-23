@@ -1,11 +1,12 @@
-{
+﻿{
   "version": "1.0.0-*",
   "buildOptions": {
     "emitEntryPoint": true
   },
 
   "dependencies": {
-    "S-Innovations.VSTeamServices.TaskBuilder.AzureResourceManager": "1.0.0-pre-2016122301"
+    "S-Innovations.VSTeamServices.TaskBuilder.KeyVault":  "1.0.0-pre-2016122301",
+    "S-Innovations.Azure.ResourceManager.CryptoHelper": "2.0.0-pre-2016111912"
   },
 
   "frameworks": {
