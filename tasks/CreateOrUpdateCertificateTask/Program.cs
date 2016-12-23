@@ -111,9 +111,9 @@ namespace CreateOrUpdateCertificateTask
 
             args = args.LoadFrom<ProgramOptions>(@"c:\dev\credsSinno.txt")
                 .Concat(new[] {
-                "--CertificateName", "ServiceFabricCert",
-                     //   "--KeyVaultName", "/subscriptions/8393a037-5d39-462d-a583-09915b4493df/resourceGroups/TestServiceFabric5/providers/Microsoft.Web/vaults/msgprc-kv-dev-0316",
-                     //   "--SecretName" ,"ServiceFabricCert",
+                        "--CertificateName", "ServiceFabricCert",
+                        "--KeyVaultName", "/subscriptions/8393a037-5d39-462d-a583-09915b4493df/resourceGroups/TestServiceFabric5/providers/Microsoft.Web/vaults/msgprc-kv-dev-0316",
+                        "--SecretName" ,"ServiceFabricCert",
                         "--ExpiresIn", "P730D" ,
                         "--PfxPassword", "123456" ,
                  //       "--OutputPath",@"C:\dev\testcert.pfx"
