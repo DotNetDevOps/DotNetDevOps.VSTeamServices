@@ -111,12 +111,12 @@ namespace CreateOrUpdateCertificateTask
 
             args = args.LoadFrom<ProgramOptions>(@"c:\dev\credsSinno.txt")
                 .Concat(new[] {
-                        "--CertificateName", "ServiceFabricCert",
-                        "--KeyVaultName", "/subscriptions/8393a037-5d39-462d-a583-09915b4493df/resourceGroups/TestServiceFabric5/providers/Microsoft.Web/vaults/msgprc-kv-dev-0316",
-                        "--SecretName" ,"ServiceFabricCert",
+                        "--CertificateName", "earthmlcore",
+                        "--KeyVaultName", "/subscriptions/1626d2da-4051-4674-9d4c-57ce23d967a3/resourceGroups/earthml-core/providers/Microsoft.KeyVault/vaults/earthml-core-k3ci",
+                        "--SecretName" ,"sfcert",
                         "--ExpiresIn", "P730D" ,
                         "--PfxPassword", "123456" ,
-                 //       "--OutputPath",@"C:\dev\testcert.pfx"
+                        "--OutputPath",@"C:\dev\testcert.pfx"
             }).ToArray();
 #endif
             var options = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Generating Certificate", args);
