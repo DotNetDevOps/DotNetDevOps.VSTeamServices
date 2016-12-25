@@ -109,7 +109,7 @@ namespace CreateOrUpdateCertificateTask
 #if DEBUG
 
 
-            args = args.LoadFrom<ProgramOptions>(@"c:\dev\credsSinno.txt")
+            args = args.LoadFrom<ProgramOptions>(@"c:\dev\credsEarthml.txt")
                 .Concat(new[] {
                         "--CertificateName", "earthmlcore",
                         "--KeyVaultName", "/subscriptions/1626d2da-4051-4674-9d4c-57ce23d967a3/resourceGroups/earthml-core/providers/Microsoft.KeyVault/vaults/earthml-core-k3ci",
