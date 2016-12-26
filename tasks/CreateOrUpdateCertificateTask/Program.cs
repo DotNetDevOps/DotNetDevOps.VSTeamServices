@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
@@ -67,7 +68,8 @@ namespace CreateOrUpdateCertificateTask
         [Option("PfxPassword", HelpText = "The password for the generated pfx file")]
         public string PfxPassword { get; set; }
 
-        [Option("SetSecretContentType", Default = true, HelpText = "when enabled the secret will have its content type set to application/x-pkcs12")]
+        [DefaultValue(true)]
+        [Option("SetSecretContentType", HelpText = "when enabled the secret will have its content type set to application/x-pkcs12")]
         public bool SetSecretContentType { get; set; }
 
 
