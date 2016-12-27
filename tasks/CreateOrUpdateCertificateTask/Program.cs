@@ -92,6 +92,13 @@ namespace CreateOrUpdateCertificateTask
         [Option("VSTSDefaultCollectionUrl", HelpText = "The Url for VSTS Account, ect ' https://sinnovations.visualstudio.com/DefaultCollection '")]
         public string VSTSDefaultCollectionUrl { get; set; }
 
+
+        [Required]
+        [Display(GroupName = "WorkItem")]
+        [VisibleRule("OutputToWorkItem = true")]
+        [Option("VSTSWorkItemType", HelpText = "", Default = "Product Backlog Item")]
+        public string VSTSWorkItemType { get; set; }
+
         [Required]
         [Display(GroupName = "WorkItem")]
         [VisibleRule("OutputToWorkItem = true")]
@@ -148,7 +155,7 @@ namespace CreateOrUpdateCertificateTask
             if (options.OutputToWorkItem && isUpdated)
             {
 
-                var url = $"{options.VSTSDefaultCollectionUrl}/{options.VSTSProjectName}/_apis/wit/workitems/$Product Backlog Item?api-version=1.0";// "https://sinnovations.visualstudio.com/DefaultCollection/S-Innovations MessageProcessor/_apis/wit/workitems/$Product Backlog Item?api-version=1.0";
+                var url = $"{options.VSTSDefaultCollectionUrl}/{options.VSTSProjectName}/_apis/wit/workitems/${options.VSTSWorkItemType}?api-version=1.0";// "https://sinnovations.visualstudio.com/DefaultCollection/S-Innovations MessageProcessor/_apis/wit/workitems/$Product Backlog Item?api-version=1.0";
                 var client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
                     Convert.ToBase64String(
