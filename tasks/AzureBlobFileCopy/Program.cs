@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.IO;
@@ -84,6 +85,10 @@ namespace AzureBlobFileCopy
         [Option("prefix")]
         public string Prefix { get; set; }
 
+        [Display(Name = "Fail if files Exists")]
+        [DefaultValue(true)]
+        [Option("failOnExists")]
+        public bool FailIfFilesExist { get; set; }
 
         [Display(Name = "Storage Container Uri", GroupName = "output")]
         [Option("StorageContainerUri")]
@@ -140,6 +145,26 @@ namespace AzureBlobFileCopy
             var container = client.GetContainerReference(ops.ContainerName);
 
             await container.CreateIfNotExistsAsync();
+
+            if (ops.FailIfFilesExist)
+            {
+                var uploads = ops.Source.MatchedFiles()
+                    .Select(file => Path.Combine(ops.Prefix, file.Substring(ops.Source.Root.Length).TrimStart('/', '\\')).Replace("\\", "/"))
+                    .ToLookup(k=>k);
+
+                foreach(var file in container.ListBlobs(ops.Prefix, true).OfType<CloudBlockBlob>().Select(b => b.Name))
+                {
+                    if (uploads.Contains(file))
+                    {
+                        Console.WriteLine("##vso[task.logissue type=error] File Exists: " + file);
+                        throw new Exception("File exists: " + file);
+                    }
+                }
+
+                
+            }
+
+            
 
             var actionBlock = new TransformBlock<string, Tuple<string, CloudBlockBlob, TimeSpan>>(async (string file) =>
                {
