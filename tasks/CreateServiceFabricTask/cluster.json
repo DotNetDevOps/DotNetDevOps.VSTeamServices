@@ -156,12 +156,12 @@
     "vmNodeType0Name": "[toLower(concat('NT0', variables('vmName')))]",
     "vmNodeType0Size": "[parameters('vmNodeTypeSize')]",
     "vmStorageAccountName0": "[toLower(concat(uniqueString(resourceGroup().id), '1', '0' ))]",
-    "uniqueStringArray0": [ "[concat(variables('vmStorageAccountName0'), '0')]", "[concat(variables('vmStorageAccountName0'), '1')]", "[concat(variables('vmStorageAccountName0'), '2')]", "[concat(variables('vmStorageAccountName0'), '3')]", "[concat(variables('vmStorageAccountName0'), '4')]" ],
-    "vmssApiVersion": "2016-03-30",
+    "vmssApiVersion": "2016-04-30-preview",
     "lbApiVersion": "2015-06-15",
     "vNetApiVersion": "2015-06-15",
     "storageApiVersion": "2016-01-01",
-    "publicIPApiVersion": "2015-06-15"
+    "publicIPApiVersion": "2015-06-15",
+    "computeApiVersion": "2016-04-30-preview"
   },
   "resources": [
     {
@@ -343,38 +343,12 @@
       }
     },
     {
-      "apiVersion": "[variables('storageApiVersion')]",
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('uniqueStringArray0')[copyIndex()]]",
-      "location": "[variables('computeLocation')]",
-      "dependsOn": [],
-      "properties": {},
-      "copy": {
-        "name": "storageLoop",
-        "count": 5
-      },
-      "kind": "Storage",
-      "sku": {
-        "name": "[parameters('storageAccountType')]"
-      },
-      "tags": {
-        "hidden-resourceType": "Service Fabric",
-        "hidden-clusterName": "[parameters('clusterName')]"
-      }
-    },
-
-    {
       "apiVersion": "[variables('vmssApiVersion')]",
       "type": "Microsoft.Compute/virtualMachineScaleSets",
       "name": "[variables('vmNodeType0Name')]",
       "location": "[variables('computeLocation')]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('uniqueStringArray0')[0])]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('uniqueStringArray0')[1])]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('uniqueStringArray0')[2])]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('uniqueStringArray0')[3])]",
-        "[concat('Microsoft.Storage/storageAccounts/', variables('uniqueStringArray0')[4])]",
         "[concat('Microsoft.Network/loadBalancers/', concat('LB','-', parameters('clusterName'),'-',variables('vmNodeType0Name')))]",
         "[concat('Microsoft.Storage/storageAccounts/', variables('supportLogStorageAccountName'))]",
         "[concat('Microsoft.Storage/storageAccounts/', variables('applicationDiagnosticsStorageAccountName'))]"
@@ -613,17 +587,23 @@
               "version": "[variables('vmImageVersion')]"
             },
             "osDisk": {
-              "vhdContainers": [
-                "[concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('uniqueStringArray0')[0]), variables('storageApiVersion')).primaryEndpoints.blob, variables('vmStorageAccountContainerName'))]",
-                "[concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('uniqueStringArray0')[1]), variables('storageApiVersion')).primaryEndpoints.blob, variables('vmStorageAccountContainerName'))]",
-                "[concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('uniqueStringArray0')[2]), variables('storageApiVersion')).primaryEndpoints.blob, variables('vmStorageAccountContainerName'))]",
-                "[concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('uniqueStringArray0')[3]), variables('storageApiVersion')).primaryEndpoints.blob, variables('vmStorageAccountContainerName'))]",
-                "[concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('uniqueStringArray0')[4]), variables('storageApiVersion')).primaryEndpoints.blob, variables('vmStorageAccountContainerName'))]"
-              ],
-              "name": "vmssosdisk",
-              "caching": "ReadOnly",
-              "createOption": "FromImage"
-            }
+              "createOption": "FromImage",
+              "diskSizeGB": 20,
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            },
+            "dataDisks": [
+              {
+                "lun": 1,
+                "createOption": "Empty",
+                "caching": "ReadOnly",
+                "diskSizeGB": 10,
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                }
+              }
+            ]
           }
         }
       },

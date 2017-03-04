@@ -2,5 +2,8 @@
   "projects": [
     "tasks",
     "C:/dev/sinnovations/S-Innovations.VSTeamServices/src"
-  ]
+  ],
+  "sdk": {
+    "version": "1.0.0-preview2-003131"
+  }
 }
