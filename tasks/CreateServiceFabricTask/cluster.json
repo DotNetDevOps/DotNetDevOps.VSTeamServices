@@ -161,7 +161,9 @@
     "vNetApiVersion": "2015-06-15",
     "storageApiVersion": "2016-01-01",
     "publicIPApiVersion": "2015-06-15",
-    "computeApiVersion": "2016-04-30-preview"
+    "tenantId": "",
+    "clientApplication": "",
+    "clusterApplication": ""
   },
   "resources": [
     {
@@ -588,22 +590,11 @@
             },
             "osDisk": {
               "createOption": "FromImage",
-              "diskSizeGB": 20,
+              "diskSizeGB": 32,
               "managedDisk": {
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "[parameters('storageAccountType')]"
               }
-            },
-            "dataDisks": [
-              {
-                "lun": 1,
-                "createOption": "Empty",
-                "caching": "ReadOnly",
-                "diskSizeGB": 10,
-                "managedDisk": {
-                  "storageAccountType": "Standard_LRS"
-                }
-              }
-            ]
+            }
           }
         }
       },
@@ -630,6 +621,11 @@
         "certificate": {
           "thumbprint": "[parameters('certificateThumbprint')]",
           "x509StoreName": "[parameters('certificateStoreValue')]"
+        },
+        "azureActiveDirectory": {
+          "tenantId": "[variables('tenantId')]",
+          "clusterApplication": "[variables('clusterApplication')]",
+          "clientApplication": "[variables('clientApplication')]"
         },
         "clientCertificateCommonNames": [],
         "clientCertificateThumbprints": [],

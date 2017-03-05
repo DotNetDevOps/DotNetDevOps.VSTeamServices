@@ -19,8 +19,23 @@ namespace CreateServiceFabricTask
         {
 
         }
-       
-       
+
+        public override void OnTemplateLoaded()
+        {
+
+            this.ArmDeployment.AfterLoad.Add((template) =>
+            {
+                var tenantId = template.SelectToken("$.variables.tenantId").ToString();
+                var clientApplication = template.SelectToken("$.variables.clientApplication").ToString();
+                var clusterApplication = template.SelectToken("$.variables.clusterApplication").ToString();
+                if(string.IsNullOrEmpty(tenantId) || string.IsNullOrEmpty(clientApplication) || string.IsNullOrEmpty(clusterApplication))
+                {
+                    template.SelectToken("$.resources[?(@.type=='Microsoft.ServiceFabric/clusters')].properties.azureActiveDirectory").Remove();
+                }
+            });
+
+            base.OnTemplateLoaded();
+        }
     }
 
 
