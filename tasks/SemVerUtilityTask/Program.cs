@@ -20,6 +20,9 @@ namespace SemVerUtilityTask
         [Option("VariableName", HelpText = "The variable to set with the manipulated semver")]
         public string VariableName { get; set; }
 
+        [Option("RemoveLeadingZeros")]
+        public bool RemoveLeadingZeros { get; set; }
+
     }
     public class Program
     {
@@ -37,10 +40,22 @@ namespace SemVerUtilityTask
                 ops.SemVer = ops.SemVer.Substring(0, ops.SemVer.IndexOf("-"));
             }
 
+            if (ops.RemoveLeadingZeros)
+            {
+                var parts = ops.SemVer.Split('-');
+                if (parts.Length > 1)
+                {
+                    ops.SemVer = parts[0] + "-" + string.Join("-", parts[1].Split('.').Select(StripLeadingZeros));
+                }
+            }
+
             TaskHelper.SetVariable(ops.VariableName, ops.SemVer);
 
         }
 
-
+        private static string StripLeadingZeros(string arg)
+        {
+            return arg.TrimStart('0');
+        }
     }
 }
