@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using SInnovations.VSTeamServices.TaskBuilder.Attributes;
 using SInnovations.VSTeamServices.TaskBuilder.ConsoleUtils;
+using SInnovations.VSTeamServices.TaskBuilder.Tasks;
 
 namespace VSTSBuildInfoTask
 {
@@ -21,6 +22,18 @@ namespace VSTSBuildInfoTask
         [Display(Description = "The path to save the artifact file", Name = "Output File Name")]
         [Option("OutPutFileName")]
         public string OutPutFileName { get; set; }
+
+        /// <summary>
+        /// When used a varaible can be set with a feature name to be used in output/distribution names
+        /// </summary>
+
+        [Display(Description = "The regex pattern to select a feature name with", Name = "Feature Regex Pattern")]
+        [Option("FeatureRegexPattern")]
+        public string FeatureRegexPattern { get; set; }
+
+        [Display(Description = "The feature name output variable", Name = "Feature Variable Name")]
+        [Option("FeatureVariableName")]
+        public string FeatureVariableName { get; set; }
 
     }
 
@@ -32,7 +45,7 @@ namespace VSTSBuildInfoTask
 
             var teamUri = Environment.GetEnvironmentVariable("SYSTEM_TEAMFOUNDATIONCOLLECTIONURI");
             var teamProject = Environment.GetEnvironmentVariable("SYSTEM_TEAMPROJECT");
-            
+            var featureName = "ci";
 
 
             var token = Environment.GetEnvironmentVariable("SYSTEM_ACCESSTOKEN");
@@ -76,10 +89,21 @@ namespace VSTSBuildInfoTask
                 var httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var repositoryId = Environment.GetEnvironmentVariable("BUILD_REPOSITORY_ID");
-                var pr = httpClient.GetStringAsync($"{teamUri}_apis/git/repositories/{repositoryId}/pullRequests/{pullRquestId}?api-version=1.0-preview.1").GetAwaiter().GetResult();
+                var pr = httpClient.GetStringAsync($"{teamUri}_apis/git/repositories/{repositoryId}/pullRequests/{pullRquestId}?api-version=3.0").GetAwaiter().GetResult();
 
                 obj["pullRequest"] = JObject.Parse(pr);
 
+                var sourceRefName = obj.SelectToken("$.pullRequest.sourceRefName")?.ToString();
+                if (!string.IsNullOrEmpty(options.FeatureRegexPattern) && !string.IsNullOrEmpty(sourceRefName))
+                {
+                    featureName = Regex.Match(sourceRefName, options.FeatureRegexPattern,RegexOptions.RightToLeft).Captures[0].Value;
+                }
+
+            }
+
+            if (!string.IsNullOrEmpty(options.FeatureVariableName))
+            {
+                TaskHelper.SetVariable(options.FeatureVariableName, featureName);
             }
 
 
