@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyInformationalVersion("1.0.2")]
+[assembly: AssemblyInformationalVersion("1.0.3")]
 [assembly: AssemblyTitle("Update or validate a semver")]
 [assembly: AssemblyDescription("Alter a semver string")]
 [assembly: AssemblyConfiguration("Utility")]

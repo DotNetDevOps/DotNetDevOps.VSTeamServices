@@ -23,6 +23,9 @@ namespace SemVerUtilityTask
         [Option("RemoveLeadingZeros")]
         public bool RemoveLeadingZeros { get; set; }
 
+        [Option("FixHyphen")]
+        public bool FixHyphen { get; set; }
+
     }
     public class Program
     {
@@ -47,6 +50,15 @@ namespace SemVerUtilityTask
                 {
                     ops.SemVer = parts[0] + "-" + string.Join("-", parts[1].Split('.').Select(StripLeadingZeros));
                 }
+            }
+
+            if (ops.FixHyphen)
+            {
+                var parts = ops.SemVer.Split('-');
+                if (parts.Length > 1)
+                {
+                    ops.SemVer = parts[0] + "-" + string.Join(".", parts.Skip(1));
+                } 
             }
 
             TaskHelper.SetVariable(ops.VariableName, ops.SemVer);
