@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26608.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tasks", "tasks", "{BDC3AA70-8DE6-4CC2-9048-1D12420962B0}"
 EndProject
@@ -9,32 +9,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2EE05675-617
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2E423878-941D-4259-919E-22A87D319F8B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AzureBlobFileCopy", "tasks\AzureBlobFileCopy\AzureBlobFileCopy.xproj", "{5D9C6932-E600-4F98-B78F-38A2E0D514E6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{094E41BF-8DFA-4428-80B8-C4B1A6C1755F}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		NuGet.Config = NuGet.Config
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TwilioSMSSenderTask", "tasks\TwilioSMSSenderTask\TwilioSMSSenderTask.xproj", "{DF3B53B1-B669-4BDE-B0D1-162B982255B7}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "JsonPathManipulationTask", "tasks\JsonPathManipulationTask\JsonPathManipulationTask.xproj", "{34756F65-4262-43CC-A66D-2BE72F7BF1C7}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SemVerUtilityTask", "tasks\SemVerUtilityTask\SemVerUtilityTask.xproj", "{235C9278-EE10-4130-8859-32EB61B1050D}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "JsonPathExtractToVariableTask", "tasks\JsonPathExtractToVariableTask\JsonPathExtractToVariableTask.xproj", "{EF31F64D-0EB2-4367-91F8-5A0B2F10C40A}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "VSTSBuildInfoTask", "tasks\VSTSBuildInfoTask\VSTSBuildInfoTask.xproj", "{243ABAC4-BC62-42D2-8E69-2FC67020F2E7}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AzureWebAppDeploymentTask", "tasks\AzureWebAppDeploymentTask\AzureWebAppDeploymentTask.xproj", "{8831D079-A2F0-4D49-BEBA-3715C5450BFE}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CreateOrUpdateCertificateTask", "tasks\CreateOrUpdateCertificateTask\CreateOrUpdateCertificateTask.xproj", "{D9401915-BFA7-4D3E-92A5-DCDE4904020C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ARM", "ARM", "{59B0B721-BB77-411E-B4CF-268F6B34D9A1}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CreateServiceFabricTask", "tasks\CreateServiceFabricTask\CreateServiceFabricTask.xproj", "{14018D6C-9C9F-4E7B-AC43-4E03EB69E262}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureBlobFileCopy", "tasks\AzureBlobFileCopy\AzureBlobFileCopy.csproj", "{5D9C6932-E600-4F98-B78F-38A2E0D514E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwilioSMSSenderTask", "tasks\TwilioSMSSenderTask\TwilioSMSSenderTask.csproj", "{DF3B53B1-B669-4BDE-B0D1-162B982255B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonPathManipulationTask", "tasks\JsonPathManipulationTask\JsonPathManipulationTask.csproj", "{34756F65-4262-43CC-A66D-2BE72F7BF1C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemVerUtilityTask", "tasks\SemVerUtilityTask\SemVerUtilityTask.csproj", "{235C9278-EE10-4130-8859-32EB61B1050D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonPathExtractToVariableTask", "tasks\JsonPathExtractToVariableTask\JsonPathExtractToVariableTask.csproj", "{EF31F64D-0EB2-4367-91F8-5A0B2F10C40A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSTSBuildInfoTask", "tasks\VSTSBuildInfoTask\VSTSBuildInfoTask.csproj", "{243ABAC4-BC62-42D2-8E69-2FC67020F2E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureWebAppDeploymentTask", "tasks\AzureWebAppDeploymentTask\AzureWebAppDeploymentTask.csproj", "{8831D079-A2F0-4D49-BEBA-3715C5450BFE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateOrUpdateCertificateTask", "tasks\CreateOrUpdateCertificateTask\CreateOrUpdateCertificateTask.csproj", "{D9401915-BFA7-4D3E-92A5-DCDE4904020C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateServiceFabricTask", "tasks\CreateServiceFabricTask\CreateServiceFabricTask.csproj", "{14018D6C-9C9F-4E7B-AC43-4E03EB69E262}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +82,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{59B0B721-BB77-411E-B4CF-268F6B34D9A1} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{5D9C6932-E600-4F98-B78F-38A2E0D514E6} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{DF3B53B1-B669-4BDE-B0D1-162B982255B7} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{34756F65-4262-43CC-A66D-2BE72F7BF1C7} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
@@ -91,7 +91,6 @@ Global
 		{243ABAC4-BC62-42D2-8E69-2FC67020F2E7} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{8831D079-A2F0-4D49-BEBA-3715C5450BFE} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{D9401915-BFA7-4D3E-92A5-DCDE4904020C} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
-		{59B0B721-BB77-411E-B4CF-268F6B34D9A1} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{14018D6C-9C9F-4E7B-AC43-4E03EB69E262} = {59B0B721-BB77-411E-B4CF-268F6B34D9A1}
 	EndGlobalSection
 EndGlobal
