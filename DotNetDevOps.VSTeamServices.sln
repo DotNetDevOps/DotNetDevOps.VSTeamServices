@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateOrUpdateCertificateTa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateServiceFabricTask", "tasks\CreateServiceFabricTask\CreateServiceFabricTask.csproj", "{14018D6C-9C9F-4E7B-AC43-4E03EB69E262}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EchoTask", "tasks\EchoTask\EchoTask.csproj", "{B59CF051-BDD4-45EB-A3DB-5CA1E42AF504}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{14018D6C-9C9F-4E7B-AC43-4E03EB69E262}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14018D6C-9C9F-4E7B-AC43-4E03EB69E262}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14018D6C-9C9F-4E7B-AC43-4E03EB69E262}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B59CF051-BDD4-45EB-A3DB-5CA1E42AF504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B59CF051-BDD4-45EB-A3DB-5CA1E42AF504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B59CF051-BDD4-45EB-A3DB-5CA1E42AF504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B59CF051-BDD4-45EB-A3DB-5CA1E42AF504}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,5 +98,6 @@ Global
 		{8831D079-A2F0-4D49-BEBA-3715C5450BFE} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{D9401915-BFA7-4D3E-92A5-DCDE4904020C} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{14018D6C-9C9F-4E7B-AC43-4E03EB69E262} = {59B0B721-BB77-411E-B4CF-268F6B34D9A1}
+		{B59CF051-BDD4-45EB-A3DB-5CA1E42AF504} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 	EndGlobalSection
 EndGlobal
