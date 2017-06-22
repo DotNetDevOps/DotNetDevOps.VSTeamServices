@@ -592,7 +592,7 @@
               "createOption": "FromImage",
               "diskSizeGB": 32,
               "managedDisk": {
-                "storageAccountType": "[parameters('storageAccountType')]"
+                "storageAccountType": "Premium_LRS"
               }
             }
           }
