@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Echo Task")]
 [assembly: AssemblyDescription("Write out message")]
-[assembly: AssemblyInformationalVersion("1.0.5")]  //Update to do new release
+[assembly: AssemblyInformationalVersion("1.0.6")]  //Update to do new release
 [assembly: AssemblyConfiguration("Utility")]
 [assembly: AssemblyCompany("S-Innovations v/Poul K. Sørensen")]
 [assembly: AssemblyProduct("EchoTask")]
@@ -42,7 +42,7 @@ namespace EchoTask
         {
             var ops = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Sending SMS", args);
 
-            Console.WriteLine("Echo : " + ops.Message);
+            Console.WriteLine("Echo 2 : " + ops.Message);
 
         }
     }
