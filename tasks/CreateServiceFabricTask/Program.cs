@@ -30,7 +30,8 @@ namespace CreateServiceFabricTask
                 var clusterApplication = template.SelectToken("$.variables.clusterApplication").ToString();
                 if(string.IsNullOrEmpty(tenantId) || string.IsNullOrEmpty(clientApplication) || string.IsNullOrEmpty(clusterApplication))
                 {
-                    template.SelectToken("$.resources[?(@.type=='Microsoft.ServiceFabric/clusters')].properties.azureActiveDirectory").Remove();
+                    template.SelectToken("$.resources[?(@.type=='Microsoft.ServiceFabric/clusters')].properties.azureActiveDirectory")
+                    .Parent.Remove(); //Remove the JProperty on parent
                 }
             });
 
