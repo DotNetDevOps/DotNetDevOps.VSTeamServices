@@ -590,10 +590,7 @@
             },
             "osDisk": {
               "createOption": "FromImage",
-              "diskSizeGB": 32,
-              "managedDisk": {
-                "storageAccountType": "Premium_LRS"
-              }
+              "diskSizeGB": 100
             }
           }
         }
