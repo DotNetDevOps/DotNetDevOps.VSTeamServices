@@ -30,8 +30,11 @@ namespace CreateServiceFabricTask
                 var clusterApplication = template.SelectToken("$.variables.clusterApplication").ToString();
                 if(string.IsNullOrEmpty(tenantId) || string.IsNullOrEmpty(clientApplication) || string.IsNullOrEmpty(clusterApplication))
                 {
-                    template.SelectToken("$.resources[?(@.type=='Microsoft.ServiceFabric/clusters')].properties.azureActiveDirectory")
-                    .Parent.Remove(); //Remove the JProperty on parent
+                    var jprop = template.SelectToken("$.resources[?(@.type=='Microsoft.ServiceFabric/clusters')].properties.azureActiveDirectory");
+
+                    if (jprop != null)  //Remove the JProperty on parent
+                        jprop.Parent.Remove();
+                 
                 }
             });
 
@@ -128,7 +131,7 @@ namespace CreateServiceFabricTask
             //        "--outgatewayEndpoint", "gatewayEndpoint",
             //        "--outvmStorageAccountName", "vmStorageAccountName"
             //    }).ToArray();
-            args = new[] { "--build" };
+          //  args = new[] { "--build" };
 #endif
             try
             {
