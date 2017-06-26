@@ -590,7 +590,7 @@
             },
             "osDisk": {
               "createOption": "FromImage",
-              "diskSizeGB": 100
+              "caching": "ReadWrite"
             }
           }
         }
