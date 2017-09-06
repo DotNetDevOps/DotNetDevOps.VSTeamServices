@@ -79,6 +79,18 @@ namespace AddSecretToKeyVaultTask
     {
         static void Main(string[] args)
         {
+#if DEBUG
+            args = args.LoadFrom<ProgramOptions>(@"c:\dev\credsEarthml.txt")
+                .Concat(new[] {
+                    "--KeyVaultName", "",
+                    "--SecretName", "test",
+                    "--Value", "dasda"
+                    //"--ThumbprintVariableName", "citestcert-thumbprint",
+                }).ToArray();
+
+            args = new[] { "--build" };
+#endif
+
             var options = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Parsing arguments", args);
 
             if (options.KeyVault.IsConfigured())
