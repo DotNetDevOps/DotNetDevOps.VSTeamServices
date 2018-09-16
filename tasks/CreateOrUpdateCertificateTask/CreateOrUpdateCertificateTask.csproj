@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>CreateOrUpdateCertificateTask</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>CreateOrUpdateCertificateTask</PackageId>
@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="S-Innovations.Azure.ResourceManager.CryptoHelper" Version="2.0.0-pre-*" />
-    <PackageReference Include="S-Innovations.VSTeamServices.TaskBuilder.KeyVault" Version="1.0.0-pre*" />
+    <PackageReference Include="S-Innovations.Azure.ResourceManager.CryptoHelper" Version="2.0.0-pre-2017071205" />
+    <PackageReference Include="S-Innovations.VSTeamServices.TaskBuilder.KeyVault" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">

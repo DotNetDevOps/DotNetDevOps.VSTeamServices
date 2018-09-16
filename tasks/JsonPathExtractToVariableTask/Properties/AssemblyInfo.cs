@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyInformationalVersion("1.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.1")]
 [assembly: AssemblyTitle("JsonPath Extraction Task")]
 [assembly: AssemblyDescription("Using JsonPath properties can be extracted to variables")]
 [assembly: AssemblyConfiguration("Utility")]

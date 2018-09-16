@@ -150,9 +150,9 @@ namespace AzureBlobFileCopy
             {
                 var uploads = ops.Source.MatchedFiles()
                     .Select(file => Path.Combine(ops.Prefix, file.Substring(ops.Source.Root.Length).TrimStart('/', '\\')).Replace("\\", "/"))
-                    .ToLookup(k=>k);
+                    .ToLookup(k => k);
 
-                foreach(var file in container.ListBlobs(ops.Prefix, true).OfType<CloudBlockBlob>().Select(b => b.Name))
+                foreach (var file in await GetBlobs(ops, container))
                 {
                     if (uploads.Contains(file))
                     {
@@ -161,10 +161,10 @@ namespace AzureBlobFileCopy
                     }
                 }
 
-                
+
             }
 
-            
+
 
             var actionBlock = new TransformBlock<string, Tuple<string, CloudBlockBlob, TimeSpan>>(async (string file) =>
                {
@@ -224,6 +224,23 @@ namespace AzureBlobFileCopy
                      true);
             }
 
+        }
+
+        private static async Task<IEnumerable<string>> GetBlobs(ProgramOptions ops, CloudBlobContainer container)
+        {
+            var list = new List<string>();
+            BlobContinuationToken blobContinuationToken = null;
+            do
+            {
+                var result = (await container.ListBlobsSegmentedAsync(ops.Prefix, true, BlobListingDetails.Metadata, null, blobContinuationToken, null, null, CancellationToken.None))
+                                ;
+                list.AddRange(result.Results.OfType<CloudBlockBlob>().Select(b => b.Name));
+
+                blobContinuationToken = result.ContinuationToken;
+
+            } while (blobContinuationToken != null);
+
+            return list;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace SemVerUtilityTask
 
             var ops = ConsoleHelper.ParseAndHandleArguments<ProgramOptions>("Runing SemVer Manipuaton", args);
 
-            if (ops.StripPrereleases)
+            if (ops.StripPrereleases && ops.SemVer.IndexOf("-") != -1)
             {
                 ops.SemVer = ops.SemVer.Substring(0, ops.SemVer.IndexOf("-"));
             }

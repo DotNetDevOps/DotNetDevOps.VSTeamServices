@@ -181,8 +181,8 @@ namespace AzureWebAppDeploymentTask
             {
                 client.SubscriptionId = options.ConnectedServiceName.SubscriptionId;
 
-                var site = client.Sites.GetSite(options.WebAppResourceGroupName, options.WebApp);
-                var cred = client.Sites.ListSitePublishingCredentials(options.WebAppResourceGroupName, options.WebApp);
+                var site = client.WebApps.Get(options.WebAppResourceGroupName, options.WebApp);
+                var cred = client.WebApps.ListPublishingCredentials(options.WebAppResourceGroupName, options.WebApp);
 
                 //this will mask the credentials in logs.
                 TaskHelper.SetVariable("si_webapp_deployment_cred", cred.PublishingPassword, true);
@@ -223,13 +223,13 @@ namespace AzureWebAppDeploymentTask
 
                     if (!string.IsNullOrEmpty(pullRequestId))
                     {
-                        var appConfig = client.Sites.GetSiteConfig(options.WebAppResourceGroupName, options.WebApp);
+                        var appConfig = client.WebApps.GetConfiguration(options.WebAppResourceGroupName, options.WebApp);
 
                         EnsureVirtualAppCreated(appConfig, "/pr", $@"site\pr");
                         EnsureVirtualAppCreated(appConfig, $"/pr/{repositoryName}", $@"site\pr\{repositoryName}");
                         options.AppOfflineRule = options.AppOfflineRule && EnsureVirtualAppCreated(appConfig, $"/pr/{repositoryName}/{pullRequestId}", $@"site\pr\{repositoryName}\{pullRequestId}");
 
-                        client.Sites.CreateOrUpdateSiteConfig(options.WebAppResourceGroupName, options.WebApp, appConfig);
+                        client.WebApps.CreateOrUpdateConfiguration(options.WebAppResourceGroupName, options.WebApp, appConfig);
 
                         options.DeployIisAppPath = $"/pr/{repositoryName}/{pullRequestId}";
 
@@ -278,7 +278,7 @@ namespace AzureWebAppDeploymentTask
                 {
                     if (options.RestartAppService)
                     {
-                        client.Sites.StopSite(options.WebAppResourceGroupName, options.WebApp);
+                        client.WebApps.Stop(options.WebAppResourceGroupName, options.WebApp);
                     }
                     Console.WriteLine($"{GetMSDeploy()} {publishArgs}");
                     var tokenS = new CancellationTokenSource(2 * 60 * 1000);
@@ -301,7 +301,7 @@ namespace AzureWebAppDeploymentTask
                     if (options.RestartAppService)
                     {
 
-                        client.Sites.StartSite(options.WebAppResourceGroupName, options.WebApp);
+                        client.WebApps.Start(options.WebAppResourceGroupName, options.WebApp);
                     }
                 }
                 //catch any leftovers in redirected stdout
@@ -353,7 +353,7 @@ namespace AzureWebAppDeploymentTask
 
         }
 
-        private static bool EnsureVirtualAppCreated(SiteConfig appConfig, string virt, string phy)
+        private static bool EnsureVirtualAppCreated(SiteConfigResource appConfig, string virt, string phy)
         {
             if (!appConfig.VirtualApplications.Any(p => p.VirtualPath == virt))
             {

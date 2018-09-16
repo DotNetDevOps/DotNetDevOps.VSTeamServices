@@ -243,3 +243,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/tasks/AzureBlobFileCopy/out
+/tasks/JsonPathExtractToVariableTask/out
+/tasks/JsonPathManipulationTask/out
+/tasks/SemVerUtilityTask/out
+/tasks/VSTSBuildInfoTask/out
