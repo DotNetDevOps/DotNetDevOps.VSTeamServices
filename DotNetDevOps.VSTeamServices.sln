@@ -41,7 +41,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DownloadAndInstallCertifica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddSecretToKeyVaultTask", "tasks\AddSecretToKeyVaultTask\AddSecretToKeyVaultTask.csproj", "{1ECFF794-A89A-4FB3-9002-BC5AC313D60C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetVMSSCapacityTask", "tasks\SetVMSSCapacityTask\SetVMSSCapacityTask.csproj", "{DDE08BB4-0CD9-4EE2-B892-0D64A47AC587}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SetVMSSCapacityTask", "tasks\SetVMSSCapacityTask\SetVMSSCapacityTask.csproj", "{DDE08BB4-0CD9-4EE2-B892-0D64A47AC587}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtractServiceFabricApplicationVersionTask", "tasks\ExtractServiceFabricApplicationVersionTask\ExtractServiceFabricApplicationVersionTask.csproj", "{0FEE5E06-8CFB-4953-A5AE-222F7CF07664}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,10 @@ Global
 		{DDE08BB4-0CD9-4EE2-B892-0D64A47AC587}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDE08BB4-0CD9-4EE2-B892-0D64A47AC587}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDE08BB4-0CD9-4EE2-B892-0D64A47AC587}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FEE5E06-8CFB-4953-A5AE-222F7CF07664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FEE5E06-8CFB-4953-A5AE-222F7CF07664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FEE5E06-8CFB-4953-A5AE-222F7CF07664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FEE5E06-8CFB-4953-A5AE-222F7CF07664}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -120,6 +126,7 @@ Global
 		{1502E5C6-860C-4738-88A5-DC4ABFF75D7D} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{1ECFF794-A89A-4FB3-9002-BC5AC313D60C} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 		{DDE08BB4-0CD9-4EE2-B892-0D64A47AC587} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
+		{0FEE5E06-8CFB-4953-A5AE-222F7CF07664} = {BDC3AA70-8DE6-4CC2-9048-1D12420962B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A3371A5-28EB-43B5-B11C-5381A9AD7217}

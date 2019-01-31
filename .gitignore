@@ -248,3 +248,4 @@ ModelManifest.xml
 /tasks/JsonPathManipulationTask/out
 /tasks/SemVerUtilityTask/out
 /tasks/VSTSBuildInfoTask/out
+/tasks/ExtractServiceFabricApplicationVersionTask/out

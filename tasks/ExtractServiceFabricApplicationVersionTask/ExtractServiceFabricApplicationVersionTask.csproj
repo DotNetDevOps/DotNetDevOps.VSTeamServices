@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>VSTSBuildInfoTask</AssemblyName>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>ExtractServiceFabricApplicationVersionTask</AssemblyName>
     <OutputType>Exe</OutputType>
-    <PackageId>VSTSBuildInfoTask</PackageId>
+    <PackageId>ExtractServiceFabricApplicationVersionTask</PackageId>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="S-Innovations.VSTeamServices.TaskBuilder.AzureResourceManager" Version="2.1.1" />
   </ItemGroup>
-
+ 
 </Project>
